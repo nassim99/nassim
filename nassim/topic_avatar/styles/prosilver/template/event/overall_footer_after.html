@@ -4,7 +4,8 @@
 $(function() {
 		var url = "{topicrow.U_TOPIC_AUTHOR}"
     url = url.split("u=");
-		$( "[id='mynt{topicrow.TOPIC_AUTHOR}']" ).load( "./app.php/avatar/"+url[1]+".html" );
+		url1 = url[1].split("&amp;sid");
+		$( "[id='mynt{topicrow.TOPIC_AUTHOR}']" ).load( "./app.php/avatar/"+url1[0]+".html" );
 });
 </script>
 <!-- END topicrow -->
