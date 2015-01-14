@@ -1,0 +1,9 @@
+services:
+    nassim.avatar.controller:
+        class: nassim\topic_avatar\controller\main
+        arguments:
+            - @config
+            - @dbal.conn
+            - @controller.helper
+            - @template
+            - @user

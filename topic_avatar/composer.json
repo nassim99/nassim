@@ -1,0 +1,27 @@
+{
+"name": "nassim/topic_avatar",
+"type": "phpbb-extension",
+"description": "show author avatar on viewforum",
+"homepage": "http://www.plus4arab.com",
+"version": "1.0.0",
+"time": "2014-01-14",
+"license": "GPL-2.0",
+"authors": [{
+"name": "nassim redwan",
+"email": "redoin10@gmail.com",
+"homepage": "http://www.plus4arab.com",
+"role": "owner"
+}],
+"require": {
+"php": ">=5.3.3"
+},
+"require-dev": {
+"phpbb/epv": "dev-master"
+},
+"extra": {
+"display-name": "phpbb 3.1 topic avatar",
+"soft-require": {
+"phpbb/phpbb": ">=3.1.0-RC2,<3.2.*@dev"
+}
+}
+}
