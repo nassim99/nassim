@@ -89,7 +89,7 @@ class main implements EventSubscriberInterface
 		
 		
 		if ($row['user_avatar_type'] == "avatar.driver.local") {
-					$topic_row['AVATAR'] = '<img src="http://' . $this->config['cookie_domain'] . '' . $this->config['script_path'] . '/images/avatars/gallery/' . $row['user_avatar'] . '" width="35px" height="35px" alt="' . $row['username'] . '" />';
+					$topic_row['AVATAR'] = '<img src="http://' . $this->config['server_name'] . '' . $this->config['script_path'] . '/images/avatars/gallery/' . $row['user_avatar'] . '" width="35px" height="35px" alt="' . $row['username'] . '" />';
 
 		}
 		else if ($row['user_avatar_type'] == "avatar.driver.gravatar") {
@@ -102,10 +102,10 @@ class main implements EventSubscriberInterface
 					$topic_row['AVATAR'] = '<img src="' . $row['user_avatar'] . '" width="35px" height="35px"  alt="' . $row['username'] . '" />';
 		}
 		else if ($row['user_avatar_type'] == "avatar.driver.upload") {
-					$topic_row['AVATAR'] = '<img src="http://' . $this->config['cookie_domain'] . '' . $this->config['script_path'] . '/download/file.php?avatar=' . $row['user_avatar'] . '" width="35px" height="35px"  alt="' . $row['username'] . '" />';
+					$topic_row['AVATAR'] = '<img src="http://' . $this->config['server_name'] . '' . $this->config['script_path'] . '/download/file.php?avatar=' . $row['user_avatar'] . '" width="35px" height="35px"  alt="' . $row['username'] . '" />';
 		}
 		else {
-					$topic_row['AVATAR'] = '<img src="http://' . $this->config['cookie_domain'] . '' . $this->config['script_path'] . '/styles/prosilver/theme/images/no_avatar.gif" with="35px" height="35px"  alt="' . $row['username'] . '" />';
+					$topic_row['AVATAR'] = '<img src="http://' . $this->config['server_name'] . '' . $this->config['script_path'] . '/styles/prosilver/theme/images/no_avatar.gif" width="35px" height="35px"  alt="' . $row['username'] . '" />';
 		}
 		
 	
