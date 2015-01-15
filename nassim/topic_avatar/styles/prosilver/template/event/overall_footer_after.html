@@ -1,15 +1,4 @@
 <!-- IF SCRIPT_NAME eq 'viewforum' -->
-<!-- BEGIN topicrow -->
-<script type="text/javascript">
-$(function() {
-		var url = "{topicrow.U_TOPIC_AUTHOR}"
-    url = url.split("u=");
-		url1 = url[1].split("&amp;sid");
-		$( "[id='mynt{topicrow.TOPIC_AUTHOR}']" ).load( "./app.php/avatar/"+url1[0]+".html" );
-});
-</script>
-<!-- END topicrow -->
-
 <style>
 div.topic_avatar {
 float:left;

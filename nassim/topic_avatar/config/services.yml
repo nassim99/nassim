@@ -1,9 +1,12 @@
 services:
-    nassim.avatar.controller:
-        class: nassim\topic_avatar\controller\main
+    nassim.avatar.listener:
+        class: nassim\topic_avatar\event\main
         arguments:
-            - @config
             - @dbal.conn
-            - @controller.helper
+            - @config
             - @template
+            - @request
             - @user
+        tags:
+            - { name: event.listener }
+            

@@ -1,3 +1,0 @@
-nassim_avatar_controller:
-    pattern: /avatar/{name}.html
-    defaults: { _controller: nassim.avatar.controller:handle }
