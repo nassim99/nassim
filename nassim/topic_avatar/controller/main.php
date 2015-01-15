@@ -23,7 +23,7 @@ class main
 
 	/* @var \phpbb\user */
 	protected $user;
-
+	
 	/**
 	* Constructor
 	*
@@ -42,7 +42,7 @@ class main
 	}
 
 	/**
-	* Demo controller for route /avater/{name}
+	* Demo controller for route /avatar/{name}
 	*
 	* @param string		$name
 	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
@@ -70,7 +70,7 @@ class main
 		{
 		if ($row['user_avatar_type'] == "avatar.driver.local") {
 		$this->template->assign_vars(array(
-			'AVATAR'					=> '<img src="./images/avatars/gallery/' . $row['user_avatar'] . '" width="35px" height="35px" alt="' . $row['username'] . '" />',
+			'AVATAR'					=> '<img src="http://' . $this->config['cookie_domain'] . '' . $this->config['script_path'] . '/images/avatars/gallery/' . $row['user_avatar'] . '" width="35px" height="35px" alt="' . $row['username'] . '" />',
 			));
 		}
 		else if ($row['user_avatar_type'] == "avatar.driver.gravatar") {
@@ -88,12 +88,12 @@ class main
 		}
 		else if ($row['user_avatar_type'] == "avatar.driver.upload") {
 		$this->template->assign_vars(array(
-			'AVATAR'					=> '<img src="./download/file.php?avatar=' . $row['user_avatar'] . '" width="35px" height="35px"  alt="' . $row['username'] . '" />',
+			'AVATAR'					=> '<img src="http://' . $this->config['cookie_domain'] . '' . $this->config['script_path'] . '/download/file.php?avatar=' . $row['user_avatar'] . '" width="35px" height="35px"  alt="' . $row['username'] . '" />',
 			));
 		}
 		else {
 		$this->template->assign_vars(array(
-			'AVATAR'					=> '<img src="./styles/prosilver/theme/images/no_avatar.gif" with="35px" height="35px"  alt="' . $row['username'] . '" />',
+			'AVATAR'					=> '<img src="http://' . $this->config['cookie_domain'] . '' . $this->config['script_path'] . '/styles/prosilver/theme/images/no_avatar.gif" with="35px" height="35px"  alt="' . $row['username'] . '" />',
 			));		
 		}
 
