@@ -56,6 +56,7 @@ class main implements EventSubscriberInterface
 	{
 		return array(
 
+			'core.viewforum_get_topic_data'				=> 'viewforum_topic_avatar',
 			'core.viewforum_modify_topicrow'				=> 'viewforum_modify_topicrow',
 
 		);
@@ -68,50 +69,44 @@ class main implements EventSubscriberInterface
 	* @return	null
 	* @access	public
 	*/
-	public function viewforum_modify_topicrow($event)
+	public function viewforum_topic_avatar($event)
+	{
+		$sql_array = $event['sql_array'];
+		$sql_array['LEFT_JOIN'][] = array('FROM' => array(USERS_TABLE => 'u'), 'ON' => 'u.user_id = t.topic_poster');
+		$sql_array['SELECT'] .= ', u.user_avatar, u.user_avatar_type, u.username';
+	 $event['sql_array'] = $sql_array;
+		}
+
+
+
+public function viewforum_modify_topicrow($event)
 	{
 		$topic_row = $event['topic_row'];
-		$topic_row['U_VIEW_TOPICC'] = $event['row']['topic_poster'];		
-		$sql_array = array(
-			'SELECT'	=> "u.user_avatar, u.user_id, u.username, u.user_avatar_type",
+		$row  = $event['row'];
+		$avatar  = $event['row']['user_avatar'];
 
-			'FROM'		=> array(
-				USERS_TABLE	=> 'u',
-			),
-			'WHERE'		=> "u.user_id = " . $event['row']['topic_poster'],
-		);
-		$sql = $this->db->sql_build_query('SELECT', $sql_array);
-		$result = $this->db->sql_query_limit($sql, 1);
-
-		
-	while ($row = $this->db->sql_fetchrow($result))
-		{
-		
-		
 		if ($row['user_avatar_type'] == "avatar.driver.local") {
-					$topic_row['AVATAR'] = '<img src="http://' . $this->config['server_name'] . '' . $this->config['script_path'] . '/images/avatars/gallery/' . $row['user_avatar'] . '" width="35px" height="35px" alt="' . $row['username'] . '" />';
+					$topic_row['AVATAR'] = '<img src="http://' . $this->config['server_name'] . '' . $this->config['script_path'] . '/images/avatars/gallery/' . $avatar . '" width="35px" height="35px" alt="' . $row['username'] . '" />';
 
 		}
 		else if ($row['user_avatar_type'] == "avatar.driver.gravatar") {
-		$email = $row['user_avatar'];
+		$email = $avatar;
 		$size = 35;
 		$grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?s=" . $size;
 					$topic_row['AVATAR'] = '<img src="' . $grav_url . '"  alt="' . $row['username'] . '" />';
 		}
 		else if ($row['user_avatar_type'] == "avatar.driver.remote") {
-					$topic_row['AVATAR'] = '<img src="' . $row['user_avatar'] . '" width="35px" height="35px"  alt="' . $row['username'] . '" />';
+					$topic_row['AVATAR'] = '<img src="' . $avatar . '" width="35px" height="35px"  alt="' . $row['username'] . '" />';
 		}
 		else if ($row['user_avatar_type'] == "avatar.driver.upload") {
-					$topic_row['AVATAR'] = '<img src="http://' . $this->config['server_name'] . '' . $this->config['script_path'] . '/download/file.php?avatar=' . $row['user_avatar'] . '" width="35px" height="35px"  alt="' . $row['username'] . '" />';
+					$topic_row['AVATAR'] = '<img src="http://' . $this->config['server_name'] . '' . $this->config['script_path'] . '/download/file.php?avatar=' . $avatar . '" width="35px" height="35px"  alt="' . $row['username'] . '" />';
 		}
 		else {
 					$topic_row['AVATAR'] = '<img src="http://' . $this->config['server_name'] . '' . $this->config['script_path'] . '/styles/prosilver/theme/images/no_avatar.gif" width="35px" height="35px"  alt="' . $row['username'] . '" />';
 		}
 		
-	
-		}
+
 		$event['topic_row'] = $topic_row;		
 		}
-
 
 }
